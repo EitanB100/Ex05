@@ -20,7 +20,7 @@ namespace Ex05
 
             if (settingsFormResult == DialogResult.OK)
             {
-                Application.Run(new TicTacToeMisere(gameSettings.GameSettings));
+                Application.Run(new GameForm(gameSettings.GameSettings));
             }
         }
     }

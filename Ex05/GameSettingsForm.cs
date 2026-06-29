@@ -53,8 +53,6 @@ namespace Ex05
             
             m_GameSettings = new GameSettings(chosenGameMode, player1Name, player2Name, (int)numericUpDownRows.Value);
             DialogResult = DialogResult.OK;
-
-            
         }
 
         private void numericUpDownCols_ValueChanged(object sender, EventArgs e)

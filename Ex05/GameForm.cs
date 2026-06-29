@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace Ex05
 {
-    public partial class TicTacToeMisere : Form
+    public partial class GameForm : Form
     {
         private const int k_CellSize = 60;
         private const int k_ScoreBarSize = 40;
@@ -16,12 +16,12 @@ namespace Ex05
         private Button[,] m_BoardButtons;
         private Label m_LabelScore;
 
-        public TicTacToeMisere()
+        public GameForm()
         {
             InitializeComponent();
         }
 
-        public TicTacToeMisere(GameSettings i_GameSettings) : this()
+        public GameForm(GameSettings i_GameSettings) : this()
         {
             int boardSize = i_GameSettings.BoardSize;
 
@@ -129,10 +129,11 @@ namespace Ex05
                     endMessageTitle = "A Win!";
                     break;
             }
+
             endMessage.Append(Environment.NewLine);
             endMessage.Append("Would you like to play another round?");
 
-            DialogResult userChoice = MessageBox.Show(endMessage.ToString(), "Game Over!", MessageBoxButtons.YesNo);
+            DialogResult userChoice = MessageBox.Show(endMessage.ToString(), endMessageTitle, MessageBoxButtons.YesNo);
 
             if (userChoice == DialogResult.Yes)
             {
