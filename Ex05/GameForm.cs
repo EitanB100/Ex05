@@ -38,5 +38,30 @@ namespace Ex05
 
             buildBoard();
         }
+
+        private void buildBoard()
+        {
+            int boardSize = m_Game.Board.BoardSize;
+            m_BoardButtons = new Button[boardSize, boardSize];
+
+            for (int i = 0; i < boardSize; i++)
+            {
+                for (int j = 0; j < boardSize; j++)
+                {
+                    m_BoardButtons[i, j] = new Button();
+
+                    m_BoardButtons[i, j].Size = new Size(k_CellSize, k_CellSize);
+                    m_BoardButtons[i, j].Location = new Point(i * k_CellSize, j * k_CellSize);
+                    m_BoardButtons[i, j].Text = ePlayerSymbol.None.ToString();
+                    m_BoardButtons[i, j].Tag = new Point(i, j);
+                    m_BoardButtons[i, j].Click += cellButton_Click;
+                }
+            }
+        }
+
+        private void cellButton_Click(object sender, EventArgs e)
+        {
+            Point buttonLocation = new Point((sender as Button).Tag);
+        }
     }
 }
