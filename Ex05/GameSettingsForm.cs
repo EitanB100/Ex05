@@ -38,8 +38,23 @@ namespace Ex05
         {
             eGameMode chosenGameMode = (checkBoxPlayer2.Checked ? eGameMode.TwoPlayers : eGameMode.PlayerVsCPU);
 
-            m_GameSettings = new GameSettings(chosenGameMode, textBoxPlayer1.Text, textBoxPlayer2.Text, (int)numericUpDownRows.Value);
+            string player1Name = textBoxPlayer1.Text;
+            string player2Name = textBoxPlayer2.Text;
+
+            if (player1Name == string.Empty)
+            {
+                player1Name = "Player 1";
+            }
+
+            if (player2Name == string.Empty)
+            {
+                player2Name = "Player 2";
+            }
+            
+            m_GameSettings = new GameSettings(chosenGameMode, player1Name, player2Name, (int)numericUpDownRows.Value);
             DialogResult = DialogResult.OK;
+
+            
         }
 
         private void numericUpDownCols_ValueChanged(object sender, EventArgs e)

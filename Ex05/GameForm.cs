@@ -5,23 +5,23 @@ using System.Windows.Forms;
 
 namespace Ex05
 {
-    public partial class GameForm : Form
+    public partial class TicTacToeMisere : Form
     {
-        const int k_CellSize = 60;
-        const int k_ScoreBarSize = 40;
-        const int k_Margin = 6;
+        private const int k_CellSize = 60;
+        private const int k_ScoreBarSize = 40;
+        private const int k_Margin = 6;
 
-        Game m_Game;
-        CPU m_CPU;
-        Button[,] m_BoardButtons;
-        Label m_LabelScore;
+        private Game m_Game;
+        private CPU m_CPU;
+        private Button[,] m_BoardButtons;
+        private Label m_LabelScore;
 
-        public GameForm()
+        public TicTacToeMisere()
         {
             InitializeComponent();
         }
 
-        public GameForm(GameSettings i_GameSettings) : this()
+        public TicTacToeMisere(GameSettings i_GameSettings) : this()
         {
             int boardSize = i_GameSettings.BoardSize;
 
@@ -36,7 +36,7 @@ namespace Ex05
             buildBoard(boardSize);
             buildScoreLabels(boardSize);
 
-            this.ClientSize = new Size(k_CellSize * boardSize , k_CellSize * boardSize + k_ScoreBarSize);
+            this.ClientSize = new Size(k_CellSize * boardSize, k_CellSize * boardSize + k_ScoreBarSize);
 
             refreshBoard(boardSize);
         }
@@ -86,15 +86,13 @@ namespace Ex05
 
                     button.Text = playerSymbolToString(symbol);
                     button.Enabled = (symbol == ePlayerSymbol.None);
-
                 }
             }
 
             m_LabelScore.Text = m_Game.Players[0].Name + ": " + m_Game.Players[0].Score
                                 + "   " + m_Game.Players[1].Name + ": " + m_Game.Players[1].Score;
 
-            m_LabelScore.Location = new Point(
-                (ClientSize.Width - m_LabelScore.Width) / 2,
+            m_LabelScore.Location = new Point((ClientSize.Width - m_LabelScore.Width) / 2,
                 i_BoardSize * k_CellSize + k_Margin);
         }
 
@@ -118,21 +116,23 @@ namespace Ex05
         private void handleEndOfRound()
         {
             StringBuilder endMessage = new StringBuilder();
-
+            string endMessageTitle = string.Empty;
             switch (m_Game.GameState)
             {
                 case eGameState.Draw:
                     endMessage.Append("Tie!");
+                    endMessageTitle = "A Tie!";
                     break;
                 case eGameState.Winner:
                     endMessage.Append("The winner is ");
                     endMessage.Append(m_Game.Winner.Name);
+                    endMessageTitle = "A Win!";
                     break;
             }
             endMessage.Append(Environment.NewLine);
             endMessage.Append("Would you like to play another round?");
 
-            DialogResult userChoice = MessageBox.Show(endMessage.ToString(), "...", MessageBoxButtons.YesNo);
+            DialogResult userChoice = MessageBox.Show(endMessage.ToString(), "Game Over!", MessageBoxButtons.YesNo);
 
             if (userChoice == DialogResult.Yes)
             {
