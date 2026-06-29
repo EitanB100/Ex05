@@ -18,6 +18,10 @@ namespace Ex05
 
             DialogResult settingsFormResult = gameSettings.ShowDialog();
 
+            if (settingsFormResult == DialogResult.OK)
+            {
+                Application.Run(new GameForm());
+            }
         }
     }
 }

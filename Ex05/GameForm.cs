@@ -23,7 +23,20 @@ namespace Ex05
         public GameForm()
         {
             InitializeComponent();
+        }
 
+        public GameForm(GameSettings i_GameSettings) : this()
+        {
+            Player player1 = new Player(i_GameSettings.Player1Name, ePlayerSymbol.X, false);
+
+            bool isPlayer2CPU = (i_GameSettings.GameMode == eGameMode.PlayerVsCPU);
+            Player player2 = new Player(i_GameSettings.Player2Name, ePlayerSymbol.O, isPlayer2CPU);
+
+            m_Game = new Game(i_GameSettings.BoardSize, player1, player2, 0);
+
+            m_CPU = isPlayer2CPU ? new CPU(player2, m_Game) : null;
+
+            buildBoard();
         }
     }
 }
