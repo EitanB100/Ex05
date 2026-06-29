@@ -71,7 +71,7 @@ namespace Ex05
             m_BoardButtons[col, row].Text = string.Empty;
             m_BoardButtons[col, row].Tag = new Point(col, row);
             m_BoardButtons[col, row].Click += cellButton_Click;
-
+            m_BoardButtons[col, row].TabStop = false;
             Controls.Add(m_BoardButtons[col, row]);
         }
 
