@@ -37,6 +37,7 @@ namespace Ex05
             m_CPU = isPlayer2CPU ? new CPU(player2, m_Game) : null;
 
             buildBoard();
+            this.ClientSize = new Size(k_CellSize * i_GameSettings.BoardSize, k_CellSize * i_GameSettings.BoardSize);
         }
 
         private void buildBoard()
@@ -44,24 +45,27 @@ namespace Ex05
             int boardSize = m_Game.Board.BoardSize;
             m_BoardButtons = new Button[boardSize, boardSize];
 
-            for (int i = 0; i < boardSize; i++)
+            for (int row = 0; row < boardSize; row++)
             {
-                for (int j = 0; j < boardSize; j++)
+                for (int col = 0; col < boardSize; col++)
                 {
-                    m_BoardButtons[i, j] = new Button();
+                    m_BoardButtons[col, row] = new Button();
 
-                    m_BoardButtons[i, j].Size = new Size(k_CellSize, k_CellSize);
-                    m_BoardButtons[i, j].Location = new Point(i * k_CellSize, j * k_CellSize);
-                    m_BoardButtons[i, j].Text = ePlayerSymbol.None.ToString();
-                    m_BoardButtons[i, j].Tag = new Point(i, j);
-                    m_BoardButtons[i, j].Click += cellButton_Click;
+                    m_BoardButtons[col, row].Size = new Size(k_CellSize, k_CellSize);
+                    m_BoardButtons[col, row].Location = new Point(col * k_CellSize, row * k_CellSize);
+                    m_BoardButtons[col, row].Text = string.Empty;
+                    m_BoardButtons[col, row].Tag = new Point(col, row);
+                    m_BoardButtons[col, row].Click += cellButton_Click;
+
+                    Controls.Add(m_BoardButtons[col, row]);
                 }
             }
         }
 
         private void cellButton_Click(object sender, EventArgs e)
         {
-            Point buttonLocation = new Point((sender as Button).Tag);
+            Button clickedButton = (Button)sender;
+            Point cell = (Point)clickedButton.Tag;
         }
     }
 }
