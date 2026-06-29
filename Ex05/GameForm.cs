@@ -14,8 +14,7 @@ namespace Ex05
         Game m_Game;
         CPU m_CPU;
         Button[,] m_BoardButtons;
-        Label m_LabelScorePlayer1;
-        Label m_LabelScorePlayer2;
+        Label m_LabelScore;
 
         public GameForm()
         {
@@ -57,17 +56,10 @@ namespace Ex05
 
         private void buildScoreLabels(int i_BoardSize)
         {
-            m_LabelScorePlayer1 = new Label();
-            m_LabelScorePlayer2 = new Label();
+            m_LabelScore = new Label();
 
-            m_LabelScorePlayer1.AutoSize = true;
-            m_LabelScorePlayer2.AutoSize = true;
-
-            m_LabelScorePlayer1.Location = new Point(i_BoardSize * k_CellSize, i_BoardSize * k_CellSize + k_Margin);
-            m_LabelScorePlayer2.Location = new Point(i_BoardSize * k_CellSize + k_Margin, i_BoardSize * k_CellSize + k_Margin);
-
-            Controls.Add(m_LabelScorePlayer1);
-            Controls.Add(m_LabelScorePlayer2);
+            m_LabelScore.AutoSize = true;
+            Controls.Add(m_LabelScore);
         }
 
         private void addButtonToGrid(int row, int col)
@@ -94,11 +86,16 @@ namespace Ex05
 
                     button.Text = playerSymbolToString(symbol);
                     button.Enabled = (symbol == ePlayerSymbol.None);
+
                 }
             }
 
-            m_LabelScorePlayer1.Text = m_Game.Players[0].Name + ": " + m_Game.Players[0].Score;
-            m_LabelScorePlayer2.Text = m_Game.Players[1].Name + ": " + m_Game.Players[1].Score;
+            m_LabelScore.Text = m_Game.Players[0].Name + ": " + m_Game.Players[0].Score
+                                + "   " + m_Game.Players[1].Name + ": " + m_Game.Players[1].Score;
+
+            m_LabelScore.Location = new Point(
+                (ClientSize.Width - m_LabelScore.Width) / 2,
+                i_BoardSize * k_CellSize + k_Margin);
         }
 
         private void cellButton_Click(object sender, EventArgs e)
