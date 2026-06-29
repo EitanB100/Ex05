@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Ex05
@@ -13,8 +8,8 @@ namespace Ex05
     public partial class GameForm : Form
     {
         const int k_CellSize = 60;
-        const int k_ScoreBarSize = 20;
-        const int k_Margin = 40;
+        const int k_ScoreBarSize = 40;
+        const int k_Margin = 6;
 
         Game m_Game;
         CPU m_CPU;
@@ -42,7 +37,9 @@ namespace Ex05
             buildBoard(boardSize);
             buildScoreLabels(boardSize);
 
-            this.ClientSize = new Size(k_CellSize * boardSize + k_ScoreBarSize, k_CellSize * boardSize + k_ScoreBarSize);
+            this.ClientSize = new Size(k_CellSize * boardSize , k_CellSize * boardSize + k_ScoreBarSize);
+
+            refreshBoard(boardSize);
         }
 
         private void buildBoard(int i_BoardSize)
@@ -63,9 +60,14 @@ namespace Ex05
             m_LabelScorePlayer1 = new Label();
             m_LabelScorePlayer2 = new Label();
 
+            m_LabelScorePlayer1.AutoSize = true;
+            m_LabelScorePlayer2.AutoSize = true;
+
             m_LabelScorePlayer1.Location = new Point(i_BoardSize * k_CellSize, i_BoardSize * k_CellSize + k_Margin);
             m_LabelScorePlayer2.Location = new Point(i_BoardSize * k_CellSize + k_Margin, i_BoardSize * k_CellSize + k_Margin);
 
+            Controls.Add(m_LabelScorePlayer1);
+            Controls.Add(m_LabelScorePlayer2);
         }
 
         private void addButtonToGrid(int row, int col)
@@ -83,7 +85,6 @@ namespace Ex05
 
         private void refreshBoard(int i_BoardSize)
         {
-
             for (int row = 0; row < i_BoardSize; row++)
             {
                 for (int col = 0; col < i_BoardSize; col++)
@@ -96,6 +97,8 @@ namespace Ex05
                 }
             }
 
+            m_LabelScorePlayer1.Text = m_Game.Players[0].Name + ": " + m_Game.Players[0].Score;
+            m_LabelScorePlayer2.Text = m_Game.Players[1].Name + ": " + m_Game.Players[1].Score;
         }
 
         private void cellButton_Click(object sender, EventArgs e)
@@ -107,6 +110,7 @@ namespace Ex05
             int row = cell.Y;
 
             playMove(row, col);
+            playCpuTurns();
 
             if (m_Game.GameState != eGameState.InProgress)
             {
@@ -125,13 +129,24 @@ namespace Ex05
                     break;
                 case eGameState.Winner:
                     endMessage.Append("The winner is ");
-                    endMessage.Append(m_Game.CurrentPlayer.Name);
+                    endMessage.Append(m_Game.Winner.Name);
                     break;
             }
             endMessage.Append(Environment.NewLine);
             endMessage.Append("Would you like to play another round?");
 
-            MessageBox.Show(endMessage.ToString(), "...", MessageBoxButtons.YesNo);
+            DialogResult userChoice = MessageBox.Show(endMessage.ToString(), "...", MessageBoxButtons.YesNo);
+
+            if (userChoice == DialogResult.Yes)
+            {
+                m_Game.ResetBoard();
+                refreshBoard(m_Game.Board.BoardSize);
+                playCpuTurns();
+            }
+            else
+            {
+                Application.Exit();
+            }
         }
 
         private void playMove(int i_Row, int i_Col)
@@ -140,7 +155,7 @@ namespace Ex05
             refreshBoard(m_Game.Board.BoardSize);
         }
 
-        private void enableCPU()
+        private void playCpuTurns()
         {
             while (m_Game.GameState == eGameState.InProgress && m_Game.CurrentPlayer.IsCPU && m_CPU != null)
             {
@@ -149,11 +164,11 @@ namespace Ex05
             }
         }
 
-        private string playerSymbolToString(ePlayerSymbol symbol)
+        private string playerSymbolToString(ePlayerSymbol i_Symbol)
         {
             string result = string.Empty;
 
-            switch (symbol)
+            switch (i_Symbol)
             {
                 case ePlayerSymbol.None:
                     break;
