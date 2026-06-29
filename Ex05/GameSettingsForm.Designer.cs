@@ -52,7 +52,6 @@
             this.labelPlayers.Size = new System.Drawing.Size(56, 16);
             this.labelPlayers.TabIndex = 0;
             this.labelPlayers.Text = "Players:";
-            this.labelPlayers.Click += new System.EventHandler(this.label1_Click);
             // 
             // labelPlayer1
             // 
@@ -62,7 +61,6 @@
             this.labelPlayer1.Size = new System.Drawing.Size(59, 16);
             this.labelPlayer1.TabIndex = 1;
             this.labelPlayer1.Text = "Player 1:";
-            this.labelPlayer1.Click += new System.EventHandler(this.label2_Click);
             // 
             // labelPlayer2
             // 
@@ -111,7 +109,7 @@
             // labelRows
             // 
             this.labelRows.AutoSize = true;
-            this.labelRows.Location = new System.Drawing.Point(44, 213);
+            this.labelRows.Location = new System.Drawing.Point(34, 213);
             this.labelRows.Name = "labelRows";
             this.labelRows.Size = new System.Drawing.Size(44, 16);
             this.labelRows.TabIndex = 7;
@@ -119,7 +117,7 @@
             // 
             // numericUpDownRows
             // 
-            this.numericUpDownRows.Location = new System.Drawing.Point(94, 211);
+            this.numericUpDownRows.Location = new System.Drawing.Point(84, 211);
             this.numericUpDownRows.Maximum = new decimal(new int[] {
             10,
             0,
@@ -131,9 +129,8 @@
             0,
             0});
             this.numericUpDownRows.Name = "numericUpDownRows";
-            this.numericUpDownRows.Size = new System.Drawing.Size(38, 22);
+            this.numericUpDownRows.Size = new System.Drawing.Size(48, 22);
             this.numericUpDownRows.TabIndex = 8;
-            this.numericUpDownRows.UseWaitCursor = true;
             this.numericUpDownRows.Value = new decimal(new int[] {
             4,
             0,
@@ -144,7 +141,7 @@
             // labelColumns
             // 
             this.labelColumns.AutoSize = true;
-            this.labelColumns.Location = new System.Drawing.Point(159, 213);
+            this.labelColumns.Location = new System.Drawing.Point(149, 213);
             this.labelColumns.Name = "labelColumns";
             this.labelColumns.Size = new System.Drawing.Size(37, 16);
             this.labelColumns.TabIndex = 9;
@@ -152,7 +149,7 @@
             // 
             // numericUpDownCols
             // 
-            this.numericUpDownCols.Location = new System.Drawing.Point(202, 211);
+            this.numericUpDownCols.Location = new System.Drawing.Point(192, 211);
             this.numericUpDownCols.Maximum = new decimal(new int[] {
             10,
             0,
@@ -164,14 +161,14 @@
             0,
             0});
             this.numericUpDownCols.Name = "numericUpDownCols";
-            this.numericUpDownCols.Size = new System.Drawing.Size(38, 22);
+            this.numericUpDownCols.Size = new System.Drawing.Size(48, 22);
             this.numericUpDownCols.TabIndex = 10;
-            this.numericUpDownCols.UseWaitCursor = true;
             this.numericUpDownCols.Value = new decimal(new int[] {
             4,
             0,
             0,
             0});
+            this.numericUpDownCols.ValueChanged += new System.EventHandler(this.numericUpDownCols_ValueChanged);
             // 
             // buttonStart
             // 
@@ -206,7 +203,6 @@
             this.Name = "GameSettingsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Game Settings";
-            this.Load += new System.EventHandler(this.GameSettingsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRows)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCols)).EndInit();
             this.ResumeLayout(false);

@@ -50,6 +50,12 @@
     <Compile Include="eGameMode.cs" />
     <Compile Include="eGameState.cs" />
     <Compile Include="ePlayerSymbol.cs" />
+    <Compile Include="GameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GameForm.Designer.cs">
+      <DependentUpon>GameForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="GameSettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
