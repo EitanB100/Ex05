@@ -62,18 +62,18 @@ namespace Ex05
             Controls.Add(m_LabelScore);
         }
 
-        private void addButtonToGrid(int row, int col)
+        private void addButtonToGrid(int i_Row, int i_Col)
         {
-            m_BoardButtons[col, row] = new Button();
+            m_BoardButtons[i_Col, i_Row] = new Button();
 
-            m_BoardButtons[col, row].Size = new Size(k_CellSize, k_CellSize);
-            m_BoardButtons[col, row].Location = new Point(col * k_CellSize + k_Margin, row * k_CellSize + k_Margin);
-            m_BoardButtons[col, row].Text = string.Empty;
-            m_BoardButtons[col, row].Tag = new Point(col, row);
-            m_BoardButtons[col, row].Click += cellButton_Click;
-            m_BoardButtons[col, row].TabStop = false;
+            m_BoardButtons[i_Col, i_Row].Size = new Size(k_CellSize, k_CellSize);
+            m_BoardButtons[i_Col, i_Row].Location = new Point(i_Col * k_CellSize, i_Row * k_CellSize);
+            m_BoardButtons[i_Col, i_Row].Text = string.Empty;
+            m_BoardButtons[i_Col, i_Row].Tag = new Point(i_Col, i_Row);
+            m_BoardButtons[i_Col, i_Row].Click += cellButton_Click;
+            m_BoardButtons[i_Col, i_Row].TabStop = false;
 
-            Controls.Add(m_BoardButtons[col, row]);
+            Controls.Add(m_BoardButtons[i_Col, i_Row]);
         }
 
         private void refreshBoard(int i_BoardSize)
