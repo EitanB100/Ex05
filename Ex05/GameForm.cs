@@ -10,6 +10,7 @@ namespace Ex05
         private const int k_CellSize = 60;
         private const int k_ScoreBarSize = 40;
         private const int k_Margin = 6;
+        private const int k_BorderDistance = 12;
 
         private Game m_Game;
         private CPU m_CPU;
@@ -36,9 +37,16 @@ namespace Ex05
             buildBoard(boardSize);
             buildScoreLabels(boardSize);
 
-            this.ClientSize = new Size(k_CellSize * boardSize, k_CellSize * boardSize + k_ScoreBarSize);
+            int gridSize = (boardSize * k_CellSize) + ((boardSize - 1) * k_BorderDistance);
+
+            this.ClientSize = new Size(gridSize + 2 * k_Margin, gridSize + k_Margin + k_ScoreBarSize);
 
             refreshBoard(boardSize);
+
+
+            m_LabelScore.Location = new Point(
+    (ClientSize.Width - m_LabelScore.Width) / 2,
+    (ClientSize.Height - k_ScoreBarSize) + ((k_ScoreBarSize - m_LabelScore.Height) / 2));
         }
 
         private void buildBoard(int i_BoardSize)
@@ -67,7 +75,12 @@ namespace Ex05
             m_BoardButtons[i_Col, i_Row] = new Button();
 
             m_BoardButtons[i_Col, i_Row].Size = new Size(k_CellSize, k_CellSize);
-            m_BoardButtons[i_Col, i_Row].Location = new Point(i_Col * k_CellSize, i_Row * k_CellSize);
+
+            int buttonLocationX = k_BorderDistance + (i_Col * (k_CellSize + k_Margin));
+            int buttonLocationY = k_BorderDistance + (i_Row * (k_CellSize + k_Margin));
+
+            m_BoardButtons[i_Col, i_Row].Location = new Point(buttonLocationX, buttonLocationY);
+
             m_BoardButtons[i_Col, i_Row].Text = string.Empty;
             m_BoardButtons[i_Col, i_Row].Tag = new Point(i_Col, i_Row);
             m_BoardButtons[i_Col, i_Row].Click += cellButton_Click;
@@ -86,15 +99,12 @@ namespace Ex05
                     Button button = m_BoardButtons[col, row];
 
                     button.Text = playerSymbolToString(symbol);
-                    button.Enabled = (symbol == ePlayerSymbol.None);
+                    button.Enabled = (symbol == ePlayerSymbol.None ? true : false);
                 }
             }
 
             m_LabelScore.Text = m_Game.Players[0].Name + ": " + m_Game.Players[0].Score
                                 + "   " + m_Game.Players[1].Name + ": " + m_Game.Players[1].Score;
-
-            m_LabelScore.Location = new Point((ClientSize.Width - m_LabelScore.Width) / 2,
-                i_BoardSize * k_CellSize + k_Margin);
         }
 
         private void cellButton_Click(object sender, EventArgs e)
