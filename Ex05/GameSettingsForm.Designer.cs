@@ -225,7 +225,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDownCols;
         private System.Windows.Forms.Button buttonStart;
 
-        
+
     }
 }
 

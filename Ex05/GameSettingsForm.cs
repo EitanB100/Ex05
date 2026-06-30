@@ -50,7 +50,7 @@ namespace Ex05
             {
                 player2Name = "Player 2";
             }
-            
+
             m_GameSettings = new GameSettings(chosenGameMode, player1Name, player2Name, (int)numericUpDownRows.Value);
             DialogResult = DialogResult.OK;
         }
@@ -73,4 +73,3 @@ namespace Ex05
 
     }
 }
-
