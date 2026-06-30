@@ -67,11 +67,12 @@ namespace Ex05
             m_BoardButtons[col, row] = new Button();
 
             m_BoardButtons[col, row].Size = new Size(k_CellSize, k_CellSize);
-            m_BoardButtons[col, row].Location = new Point(col * k_CellSize, row * k_CellSize);
+            m_BoardButtons[col, row].Location = new Point(col * k_CellSize + k_Margin, row * k_CellSize + k_Margin);
             m_BoardButtons[col, row].Text = string.Empty;
             m_BoardButtons[col, row].Tag = new Point(col, row);
             m_BoardButtons[col, row].Click += cellButton_Click;
             m_BoardButtons[col, row].TabStop = false;
+
             Controls.Add(m_BoardButtons[col, row]);
         }
 
@@ -126,6 +127,7 @@ namespace Ex05
                 case eGameState.Winner:
                     endMessage.Append("The winner is ");
                     endMessage.Append(m_Game.Winner.Name);
+                    endMessage.Append("!");
                     endMessageTitle = "A Win!";
                     break;
             }
