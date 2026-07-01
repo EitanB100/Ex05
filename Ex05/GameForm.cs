@@ -169,7 +169,8 @@ namespace Ex05
         {
             while (m_Game.GameState == eGameState.InProgress && m_Game.CurrentPlayer.IsCPU && m_CPU != null)
             {
-                m_CPU.GetMove(m_Game.Board, out int cpuRow, out int cpuCol);
+                int cpuRow = 0, cpuCol = 0;
+                m_CPU.GetMove(m_Game.Board, out cpuRow, out cpuCol);
                 playMove(cpuRow, cpuCol);
             }
         }
