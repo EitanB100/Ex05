@@ -37,9 +37,9 @@ namespace Ex05
             buildBoard(boardSize);
             buildScoreLabels(boardSize);
 
-            int gridSize = (boardSize * k_CellSize) + ((boardSize - 1) * k_BorderDistance);
+            int gridSize = (boardSize * k_CellSize) + ((boardSize - 1) * k_Margin);
 
-            this.ClientSize = new Size(gridSize + 2 * k_Margin, gridSize + k_Margin + k_ScoreBarSize);
+            this.ClientSize = new Size(gridSize + 2 * k_BorderDistance, gridSize + 2 * k_BorderDistance + k_ScoreBarSize);
 
             refreshBoard(boardSize);
 
@@ -99,7 +99,7 @@ namespace Ex05
                     Button button = m_BoardButtons[col, row];
 
                     button.Text = playerSymbolToString(symbol);
-                    button.Enabled = (symbol == ePlayerSymbol.None ? true : false);
+                    button.Enabled = (symbol == ePlayerSymbol.None);
                 }
             }
 
